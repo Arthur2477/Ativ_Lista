@@ -2,54 +2,54 @@ import React, { useState } from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
 import { Button, Card, Divider, IconButton, Text, TextInput } from 'react-native-paper'
 
-export default function ListaCarros() {
-  const [todos, setTodos] = useState([])
+export default function ListaCar() {
+  const [total, setTotal] = useState([])
   const [inputValue, setInputValue] = useState('')
   const [editing, setEditing] = useState(false)
   const [isEditing, setIsEditing] = useState(null)
 
-  function addTodo() {
-    let todoList = todos
-    todoList.push(inputValue)
-    setTodos(todoList)
+  function addTotal() {
+    let todoLista = total
+    todoLista.push(inputValue)
+    setTotal(todoLista)
     setIsEditing(null)
     setInputValue('')
   }
 
-  function editTodo() {
-    let todoList = todos
-    todoList.splice(todos.indexOf(isEditing), 1, inputValue)
-    setTodos(todoList)
+  function editTotal() {
+    let totalList = total
+    totalList.splice(total.indexOf(isEditing), 1, inputValue)
+    setTotal(totalList)
     setEditing(false)
     setInputValue('')
   }
 
-  function deleteTodo(todo) {
-    const todoList = todos.filter(item => item !== todo)
-    setTodos(todoList)
+  function deleteTotal(total) {
+    const totalList = total.filter(item => item !== total)
+    setTotal(totalList)
   }
 
-  function handleEditTodo(todo) {
-    setIsEditing(todo)
-    setInputValue(todo)
+  function handleEditTotal(total) {
+    setIsEditing(total)
+    setInputValue(total)
     setEditing(true)
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>ToDo List</Text>
+      <Text style={styles.text}>ToTal List</Text>
       <View style={styles.inputContainer}>
         <TextInput
           style={{ flex: 4 }}
           mode='outlined'
-          label='ToDo'
+          label='TotAL'
           value={inputValue}
           onChangeText={(text) => setInputValue(text)}
         />
         <Button
           style={styles.button}
           mode='contained'
-          onPress={() => (editing) ? editTodo() : addTodo()}
+          onPress={() => (editing) ? editTotal() : addTotal()}
         >
           {editing ? 'Edit' : 'Add'}
         </Button>
@@ -58,7 +58,7 @@ export default function ListaCarros() {
 
       <FlatList
         style={styles.list}
-        data={todos}
+        data={total}
         renderItem={({ item }) => (
           <Card
             style={styles.card}
@@ -67,10 +67,10 @@ export default function ListaCarros() {
             <Card.Content style={styles.cardContent}>
               <Text variant='titleMedium' style={{ flex: 1 }}>{item}</Text>
               <IconButton icon='pen' onPress={() => {
-                handleEditTodo(item)
+                handleEditTotal(item)
               }} />
               <IconButton icon='trash-can-outline' onPress={() => {
-                deleteTodo(item)
+                deleteTotal(item)
               }} />
             </Card.Content>
           </Card>
